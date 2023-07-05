@@ -1,0 +1,392 @@
+#header {
+    height: 46px;
+    background-color: var(--black-color);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+#nav {
+    display: inline-block;
+}
+
+#nav > li {
+    display: inline-block;
+}
+
+#nav li {
+    position: relative;   
+}
+
+#nav > li > a {
+    text-transform: uppercase;
+}
+
+#nav li a {
+    text-decoration: none;
+    color: var(--white-color);
+    padding: 0 24px;
+    line-height: 46px;
+}
+
+#nav .subnav {
+    display: none;
+    position: absolute;
+    background-color: var(--white-color);
+    list-style: none;
+    min-width: 160px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+#nav .subnav a {
+    color: #000;
+    padding: 0 16px;
+    line-height: 38px;
+}
+
+#nav .nav-angle-down {
+    font-size: 10px;
+    padding-left: 5px;
+}
+
+#nav > li:hover > a,
+#nav .subnav li:hover a {
+    color: #000;
+    display: block;
+    background-color: #ccc;
+}
+
+#nav li:hover .subnav {
+    display: block;
+}
+
+#header .mobile-menu-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#header .mobile-menu-btn,
+#header .search-btn {
+    float: right;
+    padding: 0 22px;
+    cursor: pointer;
+}
+#header .mobile-menu-btn,
+#header .search-icon {
+    color: #fff;
+    font-size: 15px;
+    line-height: 46px;
+}
+
+#header .mobile-menu-btn:hover {
+    background-color: #ccc;
+}
+
+#header .mobile-menu-btn:hover .menu-icon {
+    color: var(--white-color);
+}
+
+#header .search-btn:hover {
+    background-color: #f44336;
+}
+
+#banner {
+    margin-top: 46px;
+    padding-top: 50%;
+    background: url('../img/slider/slider1.png') top center / cover no-repeat;
+    position: relative;
+}
+
+#banner .banner-text {
+    position: absolute;
+    bottom: 40px;
+    color: var(--white-color);
+    width: 100%;
+    text-shadow: 0 0 2px var(--black-color);
+}
+
+#banner .banner-heading {
+    font-weight: 500;
+    font-size: 45px;
+}
+
+#banner .banner-description {
+    font-size: 25px;
+    margin-top: 20px;
+}
+
+#content .content-section {
+    width: 800px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 64px 0 112px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+#content .section-heading {
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+#content .section-sub-heading {
+    margin-top: 30px;
+    font-size: 15px;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.6;
+}
+
+#content .about-text {
+    margin-top: 25px;
+    font-size: 15px;
+    text-align: justify;
+    line-height: 1.4;
+}
+
+#content .member-section {
+    margin-top: 36px;
+    overflow: hidden;
+}
+
+#content .member-img {
+    margin-top: 12px;
+    border-radius: 5px;
+    width: 150px;
+}
+
+#content .tour-section {
+    padding: 25px 0px;
+    background-color: var(--black-color);
+}
+
+.tour-tickets {
+    background-color: var(--white-color);
+    margin-top: 40px;
+}
+
+.tour-tickets li {
+    color: #757575;
+    font-size: 15px;
+    padding: 11px 16px;
+    border-bottom: 1px solid #ddd;
+    list-style: none;
+}
+
+.tour-tickets .sold-out {
+    background-color: #f44336;
+    color: var(--white-color);
+    padding: 3px 4px;
+    margin-left: 16px;
+}
+
+.tour-tickets .in-stock {
+    padding: 3px 4px;
+    margin-left: 16px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+}
+
+.place-list {
+    margin: 16px -8px 0;
+}
+
+.place-img {
+    width: 100%;
+    display: block;
+}
+
+.place-img:hover {
+    opacity: 0.8;
+}
+
+.place-dsc {
+    background-color: var(--white-color);
+    padding: 16px;
+    font-size: 15px;
+}
+
+.place-tittle {
+    font-weight: 500px;
+    font-size: 15px;
+}
+
+.place-date {
+    margin-top: 15px;
+    color: #757575;
+}
+
+.place-sub-dsc {
+    margin-top: 15px;
+    line-height: 1.4;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container {
+    background-color: var(--white-color);
+    width: 900px;
+    max-width: calc(100% - 64px);
+    min-height: 200px;
+    position: relative;
+    animation: modalFadeIn ease 0.8s;
+}
+
+.modal-hd-icon {
+    padding-right: 16px;
+}
+
+.modal-header {
+    background-color: #009688;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: var(--white-color);
+    
+}
+
+.modal-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--white-color);
+    padding: 12px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.modal-close:hover {
+    opacity: 2;
+    background-color: #f44336;
+}
+
+.modal-label {
+    display: block;
+    font-size: 15px;
+}
+
+.modal-input {
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin: 10px 0 25px;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+#buy-tickets {
+    background-color: #009688;
+    border: none;
+    color: var(--white-color);
+    width: 100%;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 18px;
+    margin: 0 0 10px;
+    cursor: pointer;
+}
+
+#buy-tickets:hover {
+    opacity: 0.8;
+}
+
+.modal-footer {
+    text-align: right;
+    padding: 16px;
+}
+
+.modal-footer a {
+    color: #2196f3;
+}
+
+.contact-section {
+    font-size: 18px;
+    min-height: 160px;
+    margin-top: 48px;;
+}
+
+.contact-info {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.contact-info i[class*=ti-] {
+    width: 30px;
+    display: inline-block;
+}
+
+.contact-info a {
+    color: #101aef;
+    opacity: 0.8;
+}
+
+.contact-info a:hover {
+    opacity: 1;
+}
+
+.contact-form {
+    font-size: 15px;
+}
+
+.form-control {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.map-section img {
+    width: 100%;
+}
+
+#footer {
+    padding: 64px 16px;
+    text-align: center;
+}
+
+.social-list {
+    font-size: 24px;
+}
+
+.social-list a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.copyright a:hover,
+.social-list a:hover {
+    opacity: 0.4;
+}
+
+.copyright {
+    font-size: 15px;
+    margin-top: 20px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.copyright a {
+    color: rgba(0, 0, 0, 0.6);
+}
