@@ -30,10 +30,6 @@
                     </ul>
                 </li>
             </ul>
-            <div class="search-btn">
-                <i class="search-icon fa-solid fa-magnifying-glass"></i>
-            </div>
-
             <div id='mobile-menu' class="mobile-menu-btn">
                 <i class="menu-icon fa-solid fa-bars"></i>
             </div>
@@ -74,9 +70,9 @@
                     <p class="section-sub-heading text-white">Remember to book your tickets!</p>
                 
                     <ul class="tour-tickets">
-                        <li>December <span class="stock in-stock text-center">In stock</span></li>
-                        <li>January <span class="stock in-stock text-center">In stock</span></li>
-                        <li>Febuary <span class="stock in-stock text-center">In stock</span></li>
+                        <li>December <span id="dec" class="stock in-stock text-center">In stock</span></li>
+                        <li>January <span id="jan" class="stock in-stock text-center">In stock</span></li>
+                        <li>Febuary <span id="feb" class="stock in-stock text-center">In stock</span></li>
                     </ul>
 
                     <div class="row place-list">
@@ -84,7 +80,7 @@
                             <img src="./assets/img/places/place1.jpg" alt="Qingce Village" class="place-img">
                             <div class="place-dsc">
                                 <h3 class="place-tittle">Qingce Village</h3>
-                                <p class="place-date">Wed 7 Feb 2024</p>
+                                <p class="place-date">Sun 24 Dec 2023</p>
                                 <p class="place-sub-dsc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
                                 <button class="btn s-full-width mt-16 js-buy-tickets">Buy Tickets</button>
                             </div>
@@ -94,7 +90,7 @@
                             <img src="./assets/img/places/place2.png" alt="Wangshu Inn" class="place-img">
                             <div class="place-dsc">
                                 <h3 class="place-tittle">Wangshu Inn</h3>
-                                <p class="place-date">Thu 8 Feb 2024</p>
+                                <p class="place-date">Sat 20 Jan 2024</p>
                                 <p class="place-sub-dsc">Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
                                 <button class="btn s-full-width mt-16 js-buy-tickets">Buy Tickets</button>
                             </div>
@@ -211,6 +207,7 @@
         </div>
     </div>
 
+    <div id="pop-up"></div>
     <script src="./assets/javascript/main.js"></script>
 </body>
 </html>

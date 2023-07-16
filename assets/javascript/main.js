@@ -1,41 +1,25 @@
 // JS Pay Modal
-const buyBtns = document.querySelectorAll('.js-buy-tickets')
-const modal = document.querySelector('.js-modal')
-const modalContainer = document.querySelector('.js-modal-container')
-const modalClose = document.querySelector('.js-modal-close')
-
-function showBuyTickets () {
-    modal.classList.add('active')
-}
-
-function hideBuyTickets () {
-    modal.classList.remove('active')
-}
-
-for (const buyBtn of buyBtns) {
-    buyBtn.addEventListener('click', showBuyTickets)
-}
+var buyBtns = document.querySelectorAll('.js-buy-tickets')
+var modal = document.querySelector('.js-modal')
+var modalClose = document.querySelector('.js-modal-close')
 
 modalClose.addEventListener('click', hideBuyTickets)
 modal.addEventListener('click', hideBuyTickets)
-modalContainer.addEventListener('click', function(event) {
-    event.stopPropagation()
+
+document.querySelector('.js-modal-container').addEventListener('click', function(event) {
+    event.stopPropagation();
 })
 
-// Stock menu
-var stocks = document.querySelectorAll('.stock');
-var stocksLength = stocks.length;
-var buyTickets = document.getElementById('buy-tickets');
+function showBuyTickets () {
+    modal.classList.add('modal__active')
+}
 
-for (var i = 0; i < stocksLength; i++) {
-    var stock = stocks[i];
+function hideBuyTickets () {
+    modal.classList.remove('modal__active')
+}
 
-    buyTickets.onclick = function () {
-        hideBuyTickets();
-        stock.classList.remove('in-stock');
-        stock.classList.add('sold-out');
-        stock.innerHTML = 'Sold out';
-    }
+for (var buyBtn of buyBtns) {
+    buyBtn.addEventListener('click', showBuyTickets)
 }
 
 // JS Mobile menu
@@ -68,3 +52,71 @@ for (var i = 0; i < itemsLength; i++) {
         }
     }
 }
+
+// Purchase success/failed noti
+function showNoti({ title = "", message = "", type = "info", duration = 3000 }) {
+  const main = document.getElementById("pop-up");
+  if (main) {
+    const noti = document.createElement("div");
+
+    const autoRemoveId = setTimeout(function () {
+      main.removeChild(noti);
+    }, duration + 1000);
+
+    noti.onclick = function (e) {
+      if (e.target.closest(".noti__close")) {
+        main.removeChild(noti);
+        clearTimeout(autoRemoveId);
+      }
+    };
+
+    const icons = {
+      success: "fas fa-check-circle",
+    };
+    const icon = icons[type];
+    const delay = (duration / 1000).toFixed(2);
+
+    noti.classList.add("noti", `noti--${type}`);
+    noti.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+    noti.innerHTML = `
+                    <div class="noti__icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="noti__body">
+                        <h3 class="noti__title">${title}</h3>
+                        <p class="noti__msg">${message}</p>
+                    </div>
+                    <div class="noti__close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+    main.appendChild(noti);
+  }
+}
+
+function showSuccess() {
+    showNoti({
+      title: "Congratulation!",
+      message: "You have successfully pruchased the ticket(s).",
+      type: "success",
+      duration: 5000
+    });
+    hideBuyTickets();
+}
+
+// document.getElementById('buy-tickets').addEventListener('click', showSuccess);
+// document.getElementById('buy-tickets').addEventListener('click', () => {
+//     var btn1 = buyBtns[0]
+//     var btn2 = buyBtns[1]
+//     var btn3 = buyBtns[2]
+
+//     if (btn1) {
+
+//     }
+// });
+
+// function setOutStock(stockID = "") {
+//     document.getElementById(stockID).classList.replace("in-stock", "sold-out")
+// }
+
