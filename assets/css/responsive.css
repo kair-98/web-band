@@ -89,9 +89,6 @@
     #nav > li:first-child {
         display: inline-block;
     }
-    #header .search-btn {
-        display: none;
-    }
 
     #content .member-img {
         width: 60%;

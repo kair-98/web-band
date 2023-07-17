@@ -187,7 +187,7 @@
                 Tickets
             </header>
 
-            <form action="" method="post" id="formgroup-buy">
+            <form action="" method="post" id="formgroupF">
                 <div class="modal-body">
                     <div class="modal-form">
                         <label for="ticket-quantity" class="modal-label">
@@ -236,7 +236,7 @@
         });
 
         Validator({
-            form: '#formgroup-buy',
+            form: '#formgroupF',
             errorSelector: '.form-message',
             rules: [
                 Validator.isRequired('#ticket-quantity'),
