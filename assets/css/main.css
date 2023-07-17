@@ -285,7 +285,20 @@
     width: 100%;
     padding: 10px;
     font-size: 15px;
-    margin: 10px 0 25px;
+    margin: 10px 0 12px;
+}
+
+.contact-form.invalid .form-message,
+.modal-form.invalid .form-message {
+    color: #f33a58;
+}
+  
+.form-message {
+    display: block;
+    font-size: 14px;
+    line-height: 12px;
+    padding-top: 3px;
+    padding-bottom: 16px;
 }
 
 .modal-body {
@@ -421,10 +434,6 @@
 
 .contact-info a:hover {
     opacity: 1;
-}
-
-.contact-form {
-    font-size: 15px;
 }
 
 .form-control {

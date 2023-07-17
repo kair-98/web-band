@@ -1,10 +1,10 @@
 // JS Pay Modal
-var buyBtns = document.querySelectorAll('.js-buy-tickets')
-var modal = document.querySelector('.js-modal')
-var modalClose = document.querySelector('.js-modal-close')
+var buyBtns = document.querySelectorAll('.js-buy-tickets');
+var modal = document.querySelector('.js-modal');
+var modalClose = document.querySelector('.js-modal-close');
 
-modalClose.addEventListener('click', hideBuyTickets)
-modal.addEventListener('click', hideBuyTickets)
+modalClose.addEventListener('click', hideBuyTickets);
+modal.addEventListener('click', hideBuyTickets);
 
 document.querySelector('.js-modal-container').addEventListener('click', function(event) {
     event.stopPropagation();
@@ -25,7 +25,7 @@ for (var buyBtn of buyBtns) {
 // JS Mobile menu
 var header = document.getElementById('header');
 var mobileMenu = document.getElementById('mobile-menu');
-var headerHeight = header.clientHeight
+var headerHeight = header.clientHeight;
 
 // Open close mobile menu
 mobileMenu.onclick = function() {
@@ -53,7 +53,7 @@ for (var i = 0; i < itemsLength; i++) {
     }
 }
 
-// Purchase success/failed noti
+// Purchase success noti
 function showNoti({ title = "", message = "", type = "info", duration = 3000 }) {
   const main = document.getElementById("pop-up");
   if (main) {
@@ -105,18 +105,91 @@ function showSuccess() {
     hideBuyTickets();
 }
 
-// document.getElementById('buy-tickets').addEventListener('click', showSuccess);
-// document.getElementById('buy-tickets').addEventListener('click', () => {
-//     var btn1 = buyBtns[0]
-//     var btn2 = buyBtns[1]
-//     var btn3 = buyBtns[2]
+//Validator
+function Validator(options) {
 
-//     if (btn1) {
+    var selectorRules = {};
 
-//     }
-// });
+    function validate(inputElement, rule) {
+        var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
+        var errorMessage;
+        var rules = selectorRules[rule.selector];
+        for (var i = 0; i < rules.length; ++i) {
+            errorMessage = rules[i](inputElement.value);
+            if (errorMessage) break;
+        }
+            if (errorMessage) {
+                errorElement.innerText = errorMessage;
+                inputElement.parentElement.classList.add('invalid');
+            } else {
+                errorElement.innerText = '';
+                inputElement.parentElement.classList.remove('invalid');
+            }
+        return !errorMessage;
+    }
 
-// function setOutStock(stockID = "") {
-//     document.getElementById(stockID).classList.replace("in-stock", "sold-out")
-// }
+    var formElement = document.querySelector(options.form);
+    if (formElement) {
+        formElement.onsubmit = function(e) {
+            e.preventDefault();
+            var formValid = true;
+            options.rules.forEach(function(rule) {
+                var inputElement = formElement.querySelector(rule.selector);
+                var isValid = validate(inputElement, rule);
+                if (!isValid) {
+                    formValid = false;
+                }
+            });
 
+            if (formValid) {
+                if (typeof options.onSubmit === 'function') {
+                    var validInputs = formElement.querySelectorAll('[name]');
+                    var formValues = Array.from(validInputs).reduce(function(values, input) {
+                        return (values[input.name] = input.value) && values;
+                    }, {});
+                    options.onSubmit(formValues);
+                    validInputs.forEach(input => {
+                        input.value = '';
+                    });
+                }
+            }
+        }
+        options.rules.forEach(function(rule) {
+            if (Array.isArray(selectorRules[rule.selector])) {
+                selectorRules[rule.selector].push(rule.test);
+            } else {
+                selectorRules[rule.selector] = [rule.test];
+            }
+            var inputElement = formElement.querySelector(rule.selector);
+            if (inputElement) {
+                inputElement.onblur = function() {
+                    validate(inputElement, rule);
+                }
+                inputElement.oninput = function() {
+                    var errorElement = inputElement.parentElement.querySelector(options.errorSelector);
+                    errorElement.innerText = '';
+                    inputElement.parentElement.classList.remove('invalid');
+                }
+            }
+        });
+    }
+}
+
+Validator.isRequired = function(selector, message) {
+    return {
+        selector: selector,
+        test: function(value) {
+            return value.trim() ? undefined: message || 'Please fill in this blank.';
+        }
+    };
+}
+
+Validator.isEmail = function(selector, message) {
+    return {
+        selector: selector,
+        test: function(value) {
+            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            return regex.test(value) ? undefined: message || 'This is an invalid email.';
+        }
+    };
+}

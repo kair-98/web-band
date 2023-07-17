@@ -130,19 +130,22 @@
                         </p>
                     </div>
 
-                    <div class="col s-col-full col-half contact-form">
-                        <form action="">
+                    <div class="col s-col-full col-half fs-15">
+                        <form action="" method="post" id="formgroup-fan">
                             <div class="row">
-                                <div class="col s-col-full col-half">
-                                    <input type="text" class="form-control" required placeholder="Name">
+                                <div class="col s-col-full col-half contact-form">
+                                    <input type="text" class="form-control" id="contact-name" name="contact-name" placeholder="Name">
+                                    <span class="form-message"></span>
                                 </div>
-                                <div class="col s-col-full col-half s-mt-8">
-                                    <input type="email" class="form-control" required placeholder="Email">
+                                <div class="col s-col-full col-half s-mt-8 contact-form">
+                                    <input type="email" class="form-control" id="contact-email" name="contact-email" placeholder="Email">
+                                    <span class="form-message"></span>
                                 </div>
                             </div>
                             <div class="row mt-8">
-                                <div class="col col-full">
-                                    <input type="text" class="form-control" required placeholder="Message">
+                                <div class="col col-full contact-form">
+                                    <input type="text" class="form-control" id="contact-message" name="contact-message" placeholder="Message">
+                                    <span class="form-message"></span>
                                 </div>
                             </div>
                             <input type="submit" class="btn s-full-width mt-16 pull-right" value="SEND">
@@ -172,6 +175,7 @@
         </div>
     </div>
 
+    <!-- Begin: Modal -->
     <div class="modal js-modal">
         <div class="modal-container js-modal-container">
             <div class="modal-close js-modal-close">
@@ -183,21 +187,27 @@
                 Tickets
             </header>
 
-            <form action="#tour">
+            <form action="" method="post" id="formgroup-buy">
                 <div class="modal-body">
-                    <label for="ticket-quantity" class="modal-label">
-                        <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-                        Tickets, $15 per person
-                    </label>
-                    <input id="ticket-quantity" type="number" class="modal-input" required placeholder="How many?">
+                    <div class="modal-form">
+                        <label for="ticket-quantity" class="modal-label">
+                            <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                            Tickets, $15 per person
+                        </label>
+                        <input id="ticket-quantity" name="ticket-quantity" type="number" class="modal-input" placeholder="How many?">
+                        <span class="form-message"></span>
+                    </div>
 
-                    <label for="ticket-email" class="modal-label">
-                        <i class="fa-solid fa-user"></i>
-                        Send to
-                    </label>
-                    <input id="ticket-email" type="email" class="modal-input" required placeholder="Enter email...">
-
-                    <input type="submit" id="buy-tickets" value="Pay"></input>
+                    <div class="modal-form">
+                        <label for="ticket-email" class="modal-label">
+                            <i class="fa-solid fa-user"></i>
+                            Send to
+                        </label>
+                        <input id="ticket-email" name="ticket-email" type="email" class="modal-input" placeholder="Enter email...">
+                        <span class="form-message"></span>
+                    </div>
+                    
+                    <button id="buy-tickets" class="form-submit">Pay</button>
                 </div>
             </form>
 
@@ -206,8 +216,37 @@
             </footer>
         </div>
     </div>
+    <!-- End: Modal -->
 
     <div id="pop-up"></div>
     <script src="./assets/javascript/main.js"></script>
+    <script>
+        Validator({ 
+            form: '#formgroup-fan',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#contact-name'),
+                Validator.isRequired('#contact-email'),
+                Validator.isEmail('#contact-email'),
+                Validator.isRequired('#contact-message'),
+            ],
+            onSubmit: function(data) {
+                console.log(data);
+            } 
+        });
+
+        Validator({
+            form: '#formgroup-buy',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#ticket-quantity'),
+                Validator.isRequired('#ticket-email'),
+                Validator.isEmail('#ticket-email'),
+            ],
+            onSubmit: function(data) {
+                document.getElementById('buy-tickets').addEventListener('click', showSuccess())
+            }
+        });
+    </script>
 </body>
 </html>

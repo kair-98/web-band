@@ -15,6 +15,10 @@ html {
     scroll-behavior: smooth;
 }
 
+.fs-15 {
+    font-size: 15px;
+}
+
 .text-white {
     color: var(--white-color)!important;
 }
